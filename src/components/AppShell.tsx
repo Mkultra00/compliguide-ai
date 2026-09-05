@@ -7,6 +7,7 @@ const nav = [
   { to: "/screening", label: "Screening" },
   { to: "/advisory", label: "Advisory" },
   { to: "/controls", label: "Control gaps" },
+  { to: "/briefing", label: "Briefing visuals" },
 ] as const;
 
 export function AppShell({

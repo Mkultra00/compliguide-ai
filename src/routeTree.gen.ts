@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdvisoryRouteImport } from './routes/advisory'
+import { Route as BriefingRouteImport } from './routes/briefing'
 import { Route as ControlsRouteImport } from './routes/controls'
 import { Route as ScreeningRouteImport } from './routes/screening'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdvisoryRoute = AdvisoryRouteImport.update({
   id: '/advisory',
   path: '/advisory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BriefingRoute = BriefingRouteImport.update({
+  id: '/briefing',
+  path: '/briefing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ControlsRoute = ControlsRouteImport.update({
@@ -38,12 +44,14 @@ const ScreeningRoute = ScreeningRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/advisory': typeof AdvisoryRoute
+  '/briefing': typeof BriefingRoute
   '/controls': typeof ControlsRoute
   '/screening': typeof ScreeningRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/advisory': typeof AdvisoryRoute
+  '/briefing': typeof BriefingRoute
   '/controls': typeof ControlsRoute
   '/screening': typeof ScreeningRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/advisory': typeof AdvisoryRoute
+  '/briefing': typeof BriefingRoute
   '/controls': typeof ControlsRoute
   '/screening': typeof ScreeningRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/advisory' | '/controls' | '/screening'
+  fullPaths: '/' | '/advisory' | '/briefing' | '/controls' | '/screening'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/advisory' | '/controls' | '/screening'
-  id: '__root__' | '/' | '/advisory' | '/controls' | '/screening'
+  to: '/' | '/advisory' | '/briefing' | '/controls' | '/screening'
+  id: '__root__' | '/' | '/advisory' | '/briefing' | '/controls' | '/screening'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdvisoryRoute: typeof AdvisoryRoute
+  BriefingRoute: typeof BriefingRoute
   ControlsRoute: typeof ControlsRoute
   ScreeningRoute: typeof ScreeningRoute
 }
@@ -83,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/advisory'
       fullPath: '/advisory'
       preLoaderRoute: typeof AdvisoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/briefing': {
+      id: '/briefing'
+      path: '/briefing'
+      fullPath: '/briefing'
+      preLoaderRoute: typeof BriefingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/controls': {
@@ -105,6 +122,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdvisoryRoute: AdvisoryRoute,
+  BriefingRoute: BriefingRoute,
   ControlsRoute: ControlsRoute,
   ScreeningRoute: ScreeningRoute,
 }
