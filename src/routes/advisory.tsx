@@ -19,7 +19,7 @@ export const Route = createFileRoute("/advisory")({
       },
     ],
   }),
-  component: Advisory;
+  component: Advisory,
 });
 
 const principles = [
