@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import bridget from "@/assets/bridget-avatar.jpg";
 import { AppShell } from "@/components/AppShell";
 import { DATASET_FINDINGS } from "@/lib/analysis";
 import { ACCESS_REVIEW, ASSET_INVENTORY, DATASET_SOURCE, ORG_NAME } from "@/lib/dataset";
