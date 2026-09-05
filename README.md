@@ -1,8 +1,14 @@
 # CompliGuide AI
 
-review this and tell sny feed back and recommemndatiomns. I wamt to create a co,pliamce amnd review app woth advisory and it will use an eleven labcs aget, I have the agent ID alredy and api if needed
+A compliance screening and advisory app with a voice assistant, deterministic findings, and auto-rendered dashboards.
 
 This project was built with [Lovable](https://lovable.dev).
+
+## Reference documents
+
+- [CompliGuide AI overview (deck)](docs/compliguide-ai-overview.pptx) — product overview and positioning.
+- [Nyx voice technical design](docs/nyx-voice-tdd-2.pdf) — voice assistant architecture and guardrails.
+- [Compliance screening pipeline research](docs/compliance-screening-pipeline-research-2.pdf) — screening pipeline research and findings.
 
 ## Build with Lovable
 
