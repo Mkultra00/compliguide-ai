@@ -35,15 +35,15 @@ function RiskQueue() {
       title="Risk queue"
       intro="Findings raised by fixed rules over the access review and asset inventory in your dataset. The assistant narrows and explains; a person decides. Nothing here can revoke, rotate or disable anything."
     >
-      <section className="panel flex items-center gap-4 p-5">
+      <section className="panel flex flex-col items-center gap-5 p-8 text-center sm:flex-row sm:text-left">
         <img
           src={bridget}
           alt="Bridget, the Black Chamber Review assistant"
-          className="h-16 w-16 rounded-full border-2 border-primary/20 object-cover shadow-lg"
+          className="h-64 w-64 rounded-full border-4 border-primary/20 object-cover shadow-xl"
         />
-        <div>
-          <p className="text-sm font-medium">Bridget</p>
-          <p className="text-sm text-muted-foreground">
+        <div className="max-w-xl">
+          <p className="text-lg font-semibold">Bridget</p>
+          <p className="mt-1 text-base text-muted-foreground">
             Your voice compliance assistant. Ask her about any finding, source, or recommendation.
           </p>
         </div>
