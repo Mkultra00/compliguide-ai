@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdvisoryRouteImport } from './routes/advisory'
+import { Route as ControlsRouteImport } from './routes/controls'
+import { Route as ScreeningRouteImport } from './routes/screening'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdvisoryRoute = AdvisoryRouteImport.update({
+  id: '/advisory',
+  path: '/advisory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ControlsRoute = ControlsRouteImport.update({
+  id: '/controls',
+  path: '/controls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScreeningRoute = ScreeningRouteImport.update({
+  id: '/screening',
+  path: '/screening',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/advisory': typeof AdvisoryRoute
+  '/controls': typeof ControlsRoute
+  '/screening': typeof ScreeningRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/advisory': typeof AdvisoryRoute
+  '/controls': typeof ControlsRoute
+  '/screening': typeof ScreeningRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/advisory': typeof AdvisoryRoute
+  '/controls': typeof ControlsRoute
+  '/screening': typeof ScreeningRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/advisory' | '/controls' | '/screening'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/advisory' | '/controls' | '/screening'
+  id: '__root__' | '/' | '/advisory' | '/controls' | '/screening'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdvisoryRoute: typeof AdvisoryRoute
+  ControlsRoute: typeof ControlsRoute
+  ScreeningRoute: typeof ScreeningRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/advisory': {
+      id: '/advisory'
+      path: '/advisory'
+      fullPath: '/advisory'
+      preLoaderRoute: typeof AdvisoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/controls': {
+      id: '/controls'
+      path: '/controls'
+      fullPath: '/controls'
+      preLoaderRoute: typeof ControlsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/screening': {
+      id: '/screening'
+      path: '/screening'
+      fullPath: '/screening'
+      preLoaderRoute: typeof ScreeningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdvisoryRoute: AdvisoryRoute,
+  ControlsRoute: ControlsRoute,
+  ScreeningRoute: ScreeningRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
