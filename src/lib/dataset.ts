@@ -133,3 +133,32 @@ export const QUESTIONNAIRE: QuestionRow[] = [
   { id: 66, topic: "Risk Assessment", question: "Have the findings from the most recent penetration test been remediated?", response: null },
 ];
 
+
+export const SOURCE_DOCS: SourceDoc[] = [
+  { folder: "1. Sample_Vendor questionnaire", file: "Regodit_Comprehensive_Vendor_Security_Questionnaire_Clean.xlsx", kind: "questionnaire" },
+  { folder: "2. Company policies", file: "Regodit._risk_management_policy_v1.0.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_Incident_Management_Policy_v1.0.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_Vendor_Risk_Management_Policy.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_access_control_policy_v1.0.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_asset_management_policy_v1.0.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_business_continuity_and_disaster_recovery_policy_v1.0.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_code_of_conduct_policy_v1.0.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_cryptography_policy_v1.0.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_data_classification_policy_v1.0.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_hr_policy_v1.0.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_information_security_policy_v1.0.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_password_and_secrets_policy_v1.0.docx", kind: "policy" },
+  { folder: "2. Company policies", file: "Regodit_vulnerability_and_patch_management_policy_v1.0.docx", kind: "policy" },
+  { folder: "3. Security Assessment Reports", file: "Regodit AI_SOC2_Type_II_Report_Test.docx", kind: "assessment" },
+  { folder: "3. Security Assessment Reports", file: "VAPT Report 01.docx", kind: "assessment" },
+  { folder: "4. Contracts_agreements", file: "Employment Contract 01.docx", kind: "contract" },
+  { folder: "4. Contracts_agreements", file: "Master Services Agreement.docx", kind: "contract" },
+  { folder: "5. Infrastructure_internal info", file: "Access_Review_Records.xlsx", kind: "infrastructure" },
+  { folder: "5. Infrastructure_internal info", file: "Asset_Inventory_Regodit.xlsx", kind: "infrastructure" },
+  { folder: "5. Infrastructure_internal info", file: "BCP_DR_Plan_Solsphere.docx", kind: "infrastructure" },
+  { folder: "5. Infrastructure_internal info", file: "Secure Development Lifecycle Document 01.docx", kind: "infrastructure" },
+  { folder: "5. Infrastructure_internal info", file: "Solsphere W-9.pdf", kind: "infrastructure" },
+  { folder: "5. Infrastructure_internal info", file: "admin-access-logging-diagram.png", kind: "infrastructure" },
+  { folder: "5. Infrastructure_internal info", file: "network-segmentation-diagram.png", kind: "infrastructure" },
+  { folder: "5. Infrastructure_internal info", file: "network_architecture_diagrams.pdf", kind: "infrastructure" },
+];
