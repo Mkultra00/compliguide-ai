@@ -50,8 +50,8 @@ const SEVERITY_DATA = [5, 4, 3, 2, 1].map((level) => ({
 }));
 
 const ACCESS_DATA = [
-  { name: "Justified", value: ACCESS_REVIEW.filter((r) => /yes/i.test(r.justified)).length },
-  { name: "Not justified", value: ACCESS_REVIEW.filter((r) => !/yes/i.test(r.justified)).length },
+  { name: "Justified", value: ACCESS_REVIEW.filter((r) => /^y/i.test(r.justified.trim())).length },
+  { name: "Not justified", value: ACCESS_REVIEW.filter((r) => !/^y/i.test(r.justified.trim())).length },
 ];
 
 const COVERAGE_DATA = TOPIC_COVERAGE.map((t) => ({
