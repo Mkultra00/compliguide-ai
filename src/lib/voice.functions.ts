@@ -4,8 +4,10 @@ import { createServerFn } from "@tanstack/react-start";
  * Lets the app pick up an assistant ID configured on the server, so the
  * analyst never has to paste it. Never returns the API key itself.
  */
+const DEFAULT_AGENT_ID = "agent_8401ktcfgjbff6v9msgtsp734ba7";
+
 export const getVoiceConfig = createServerFn({ method: "GET" }).handler(async () => ({
-  agentId: process.env["ELEVENLABS_AGENT_ID"] ?? null,
+  agentId: process.env["ELEVENLABS_AGENT_ID"] ?? DEFAULT_AGENT_ID,
   keyConfigured: Boolean(process.env["ELEVENLABS_API_KEY"]),
 }));
 
