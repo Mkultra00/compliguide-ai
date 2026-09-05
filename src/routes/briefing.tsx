@@ -50,8 +50,8 @@ const SEVERITY_DATA = [5, 4, 3, 2, 1].map((level) => ({
 }));
 
 const ACCESS_DATA = [
-  { name: "Justified", value: ACCESS_REVIEW.filter((r) => /yes/i.test(r.justified)).length },
-  { name: "Not justified", value: ACCESS_REVIEW.filter((r) => !/yes/i.test(r.justified)).length },
+  { name: "Justified", value: ACCESS_REVIEW.filter((r) => /^y/i.test(r.justified.trim())).length },
+  { name: "Not justified", value: ACCESS_REVIEW.filter((r) => !/^y/i.test(r.justified.trim())).length },
 ];
 
 const COVERAGE_DATA = TOPIC_COVERAGE.map((t) => ({
@@ -59,7 +59,7 @@ const COVERAGE_DATA = TOPIC_COVERAGE.map((t) => ({
   outstanding: t.total - t.answered,
 }));
 
-const PIE_COLORS = ["hsl(var(--voice))", "hsl(var(--destructive))"];
+const PIE_COLORS = ["var(--voice)", "var(--destructive)"];
 
 function Briefing() {
   const [rendered, setRendered] = useState(false);
@@ -105,7 +105,7 @@ function Briefing() {
                     <XAxis dataKey="name" stroke="currentColor" fontSize={11} />
                     <YAxis allowDecimals={false} stroke="currentColor" fontSize={11} />
                     <Tooltip />
-                    <Bar dataKey="value" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="value" fill="var(--primary)" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -136,7 +136,7 @@ function Briefing() {
                   <XAxis type="number" allowDecimals={false} stroke="currentColor" fontSize={11} />
                   <YAxis type="category" dataKey="topic" width={140} stroke="currentColor" fontSize={11} />
                   <Tooltip />
-                  <Bar dataKey="outstanding" fill="hsl(var(--destructive))" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="outstanding" fill="var(--destructive)" radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
