@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import bridget from "@/assets/bridget-avatar.jpg";
 import { AppShell } from "@/components/AppShell";
 import { DATASET_FINDINGS } from "@/lib/analysis";
 import { ACCESS_REVIEW, ASSET_INVENTORY, DATASET_SOURCE, ORG_NAME } from "@/lib/dataset";
@@ -34,6 +35,19 @@ function RiskQueue() {
       title="Risk queue"
       intro="Findings raised by fixed rules over the access review and asset inventory in your dataset. The assistant narrows and explains; a person decides. Nothing here can revoke, rotate or disable anything."
     >
+      <section className="panel flex items-center gap-4 p-5">
+        <img
+          src={bridget}
+          alt="Bridget, the Black Chamber Review assistant"
+          className="h-16 w-16 rounded-full border-2 border-primary/20 object-cover shadow-lg"
+        />
+        <div>
+          <p className="text-sm font-medium">Bridget</p>
+          <p className="text-sm text-muted-foreground">
+            Your voice compliance assistant. Ask her about any finding, source, or recommendation.
+          </p>
+        </div>
+      </section>
       <section className="panel grid gap-4 p-5 sm:grid-cols-4">
         {[
           { label: "Findings", value: DATASET_FINDINGS.length },
