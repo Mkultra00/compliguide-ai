@@ -41,3 +41,14 @@ export const getVoiceToken = createServerFn({ method: "POST" })
     const payload = (await response.json()) as { token?: string };
     return { token: payload.token ?? null, error: null as string | null };
   });
+
+/**
+ * One-shot sync: uploads the dataset briefing (plus the GitHub dataset link) to
+ * the assistant's knowledge base and attaches both to the agent, so the
+ * assistant answers from the record instead of from the model.
+ */
+export const syncVoiceKnowledge = createServerFn({ method: "POST" }).handler(async () => {
+  const { syncKnowledge } = await import("./voice-knowledge.server");
+  return syncKnowledge();
+});
+
