@@ -32,6 +32,15 @@ export function VoiceConsole() {
   }, []);
 
   const conversation = useConversation({
+    // The assistant is still configured with the older dashboard tools; accept
+    // them here so a tool call never surfaces as a session error.
+    clientTools: {
+      render_visual: async (params: unknown) => {
+        const kind = (params as { kind?: string })?.kind ?? "briefing";
+        return `Visuals are on the Briefing visuals page. Ask the analyst to press "Render briefing & findings" to draw ${kind}.`;
+      },
+      clear_dashboard: async () => "Cleared.",
+    },
     onMessage: (message: unknown) => {
       const m = message as { source?: string; message?: string };
       if (!m?.message) return;
@@ -42,6 +51,7 @@ export function VoiceConsole() {
       setNotice("The assistant disconnected. Check the agent settings and try again.");
     },
   });
+
 
   useEffect(() => {
     scroller.current?.scrollTo({ top: scroller.current.scrollHeight });
