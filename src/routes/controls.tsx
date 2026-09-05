@@ -58,10 +58,8 @@ function Controls() {
 
   function update(id: string, patch: Partial<Assessment>) {
     setAssessment((prev) => {
-      const next = {
-        ...prev,
-        [id]: { status: "unknown", owner: "", evidence: "", ...prev[id], ...patch },
-      };
+      const base: Assessment = prev[id] ?? { status: "unknown", owner: "", evidence: "" };
+      const next: Record<string, Assessment> = { ...prev, [id]: { ...base, ...patch } };
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
       return next;
     });
