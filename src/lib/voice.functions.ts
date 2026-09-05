@@ -44,49 +44,11 @@ export const getVoiceToken = createServerFn({ method: "POST" })
 
 /**
  * One-shot sync: uploads the dataset briefing (plus the GitHub dataset link) to
- * the assistant's knowledge base and attaches both documents to the agent, so
- * the assistant answers from the record instead of from the model.
+ * the assistant's knowledge base and attaches both to the agent, so the
+ * assistant answers from the record instead of from the model.
  */
 export const syncVoiceKnowledge = createServerFn({ method: "POST" }).handler(async () => {
-  const apiKey = process.env["ELEVENLABS_API_KEY"];
-  if (!apiKey) return { ok: false, error: "No voice service key configured." };
-  const agentId = process.env["ELEVENLABS_AGENT_ID"] ?? DEFAULT_AGENT_ID;
-
-  const { buildKnowledgeBriefing, KNOWLEDGE_DOC_NAME } = await import("./voice-knowledge");
-  const { DATASET_SOURCE } = await import("./dataset");
-  const headers = { "xi-api-key": apiKey, "content-type": "application/json" };
-
-  const call = async (path: string, init: RequestInit) => {
-    const res = await fetch(`https://api.elevenlabs.io${path}`, { ...init, headers });
-    const body = await res.text();
-    if (!res.ok) throw new Error(`ElevenLabs ${path} failed [${res.status}]: ${body}`);
-    return body ? (JSON.parse(body) as Record<string, unknown>) : {};
-  };
-
-  const docs: { type: string; id: string; name: string; usage_mode: string }[] = [];
-
-  const textDoc = await call("/v1/convai/knowledge-base/text", {
-    method: "POST",
-    body: JSON.stringify({ name: KNOWLEDGE_DOC_NAME, text: buildKnowledgeBriefing() }),
-  });
-  docs.push({ type: "text", id: String(textDoc["id"]), name: KNOWLEDGE_DOC_NAME, usage_mode: "auto" });
-
-  try {
-    const urlDoc = await call("/v1/convai/knowledge-base/url", {
-      method: "POST",
-      body: JSON.stringify({ url: DATASET_SOURCE, name: "Regodit dataset repository" }),
-    });
-    docs.push({ type: "url", id: String(urlDoc["id"]), name: "Regodit dataset repository", usage_mode: "auto" });
-  } catch (error) {
-    console.error(error);
-  }
-
-  await call(`/v1/convai/agents/${encodeURIComponent(agentId)}`, {
-    method: "PATCH",
-    body: JSON.stringify({
-      conversation_config: { agent: { prompt: { knowledge_base: docs, rag: { enabled: true } } } },
-    }),
-  });
-
-  return { ok: true, attached: docs.map((doc) => doc.name), error: null as string | null };
+  const { syncKnowledge } = await import("./voice-knowledge.server");
+  return syncKnowledge();
 });
+
