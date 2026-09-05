@@ -1,6 +1,15 @@
 import { createServerFn } from "@tanstack/react-start";
 
 /**
+ * Lets the app pick up an assistant ID configured on the server, so the
+ * analyst never has to paste it. Never returns the API key itself.
+ */
+export const getVoiceConfig = createServerFn({ method: "GET" }).handler(async () => ({
+  agentId: process.env["ELEVENLABS_AGENT_ID"] ?? null,
+  keyConfigured: Boolean(process.env["ELEVENLABS_API_KEY"]),
+}));
+
+/**
  * Mints a short-lived conversation token so the ElevenLabs API key never
  * reaches the browser. Returns { token: null } when no key is configured yet —
  * the client then falls back to a public agent connection.

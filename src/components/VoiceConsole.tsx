@@ -1,7 +1,7 @@
 import { useConversation } from "@elevenlabs/react";
 import { useServerFn } from "@tanstack/react-start";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { getVoiceToken } from "@/lib/voice.functions";
+import { getVoiceConfig, getVoiceToken } from "@/lib/voice.functions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -20,7 +20,15 @@ export function VoiceConsole() {
 
   useEffect(() => {
     const stored = window.localStorage.getItem(AGENT_KEY);
-    if (stored) setAgentId(stored);
+    if (stored) {
+      setAgentId(stored);
+      return;
+    }
+    getVoiceConfig()
+      .then((config) => {
+        if (config.agentId) setAgentId(config.agentId);
+      })
+      .catch(() => undefined);
   }, []);
 
   const conversation = useConversation({
