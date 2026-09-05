@@ -20,7 +20,15 @@ export function VoiceConsole() {
 
   useEffect(() => {
     const stored = window.localStorage.getItem(AGENT_KEY);
-    if (stored) setAgentId(stored);
+    if (stored) {
+      setAgentId(stored);
+      return;
+    }
+    getVoiceConfig()
+      .then((config) => {
+        if (config.agentId) setAgentId(config.agentId);
+      })
+      .catch(() => undefined);
   }, []);
 
   const conversation = useConversation({
