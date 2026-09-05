@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdvisoryRouteImport } from './routes/advisory'
 import { Route as ControlsRouteImport } from './routes/controls'
 import { Route as ScreeningRouteImport } from './routes/screening'
+import { Route as ApiPublicSyncKnowledgeRouteImport } from './routes/api/public/sync-knowledge'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const ScreeningRoute = ScreeningRouteImport.update({
   path: '/screening',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicSyncKnowledgeRoute = ApiPublicSyncKnowledgeRouteImport.update({
+  id: '/api/public/sync-knowledge',
+  path: '/api/public/sync-knowledge',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/advisory': typeof AdvisoryRoute
   '/controls': typeof ControlsRoute
   '/screening': typeof ScreeningRoute
+  '/api/public/sync-knowledge': typeof ApiPublicSyncKnowledgeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/advisory': typeof AdvisoryRoute
   '/controls': typeof ControlsRoute
   '/screening': typeof ScreeningRoute
+  '/api/public/sync-knowledge': typeof ApiPublicSyncKnowledgeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,30 @@ export interface FileRoutesById {
   '/advisory': typeof AdvisoryRoute
   '/controls': typeof ControlsRoute
   '/screening': typeof ScreeningRoute
+  '/api/public/sync-knowledge': typeof ApiPublicSyncKnowledgeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/advisory' | '/controls' | '/screening'
+  fullPaths:
+    | '/'
+    | '/advisory'
+    | '/controls'
+    | '/screening'
+    | '/api/public/sync-knowledge'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/advisory' | '/controls' | '/screening'
-  id: '__root__' | '/' | '/advisory' | '/controls' | '/screening'
+  to:
+    | '/'
+    | '/advisory'
+    | '/controls'
+    | '/screening'
+    | '/api/public/sync-knowledge'
+  id:
+    | '__root__'
+    | '/'
+    | '/advisory'
+    | '/controls'
+    | '/screening'
+    | '/api/public/sync-knowledge'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +92,7 @@ export interface RootRouteChildren {
   AdvisoryRoute: typeof AdvisoryRoute
   ControlsRoute: typeof ControlsRoute
   ScreeningRoute: typeof ScreeningRoute
+  ApiPublicSyncKnowledgeRoute: typeof ApiPublicSyncKnowledgeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ScreeningRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/sync-knowledge': {
+      id: '/api/public/sync-knowledge'
+      path: '/api/public/sync-knowledge'
+      fullPath: '/api/public/sync-knowledge'
+      preLoaderRoute: typeof ApiPublicSyncKnowledgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdvisoryRoute: AdvisoryRoute,
   ControlsRoute: ControlsRoute,
   ScreeningRoute: ScreeningRoute,
+  ApiPublicSyncKnowledgeRoute: ApiPublicSyncKnowledgeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
